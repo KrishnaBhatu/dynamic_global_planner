@@ -90,8 +90,21 @@ void Mesh::drawGraphonImage()
                 int x1 = (int)(N->getX()*10);
                 int y1 = (int)(N->getY()*10);
                 y1 = input_image_.rows - y1;
-                cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 0), 1);
+                //cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 0), 1);
             }
+        }
+        std::vector<Node*> final = findShortestPath(25, 35, 920, 500);
+        int x = (int)(final[0]->getX()*10);
+        int y = (int)(final[0]->getY()*10);
+        y = input_image_.rows - y; 
+        for(auto a: final)
+        {
+            int x1 = (int)(a->getX()*10);
+            int y1 = (int)(a->getY()*10);
+            y1 = input_image_.rows - y1;
+            cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 255), 1);
+            x = x1;
+            y = y1;
         }
         cv::imshow("Graph", img);
         cv::waitKey(0);
@@ -186,3 +199,50 @@ void Mesh::genNeighbours()
     ROS_INFO_STREAM("-----Generating Done--------");
 }
 
+Node* Mesh::findNearestNode(float x, float y)
+{
+    float min_val = std::numeric_limits<float>::max();
+    int min_count = 0;
+    for(int i = 0; i < graph.size(); i++)
+    {
+        float curr_dist = getEucledianDistance(x, y, graph[i]->getX(), graph[i]->getY());
+        if(curr_dist < min_val)
+        {
+            min_val = curr_dist;
+            min_count = i;
+        }
+    }
+    return graph[min_count];
+}
+
+std::vector<Node*> Mesh::findShortestPath(float x_start, float y_start, float x_goal, float y_goal)
+{
+    Node* start_node = findNearestNode(x_start, y_start);
+    Node* goal_node = findNearestNode(x_goal, y_goal);
+    ROS_INFO_STREAM("Start - " << start_node->getX() << ", " << start_node->getY());
+    ROS_INFO_STREAM("Goal - " << goal_node->getX() << ", " << goal_node->getY());
+    //Easy method will be to greedy (nearest_neighbour + Eucledian to goal)
+    std::queue<Node*> visited;
+    visited.push(start_node);
+    std::vector<Node*> finalPath;
+    while(visited.size() != 0)
+    {
+        Node* curr = visited.front();
+        visited.pop();
+        finalPath.push_back(curr);
+        float min_h = std::numeric_limits<float>::max();
+        int min_c = 0;
+        if(curr == goal_node) break;
+        for(int i = 0; i < curr->neighbours.size(); i++)
+        {
+            float curr_val  = curr->neighbours[i]->weight + getEucledianDistance(goal_node->getX(), goal_node->getY(), curr->neighbours[i]->getX(), curr->neighbours[i]->getY());
+            if(curr_val < min_h)
+            {
+                min_h = curr_val;
+                min_c = i; 
+            }
+        }
+        visited.push(curr->neighbours[min_c]);
+    }
+    return finalPath;
+}

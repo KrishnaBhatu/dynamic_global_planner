@@ -4,6 +4,8 @@
 #include <ros/ros.h>
 #include <algorithm>
 #include <set>
+#include <queue>
+#include <limits>
 #include "dynamic_global_planner/graph_node.h"
 
 #include "opencv2/highgui.hpp"
@@ -34,6 +36,10 @@ class Mesh
         float getEucledianDistance(float x1, float y1, float x2, float y2);
 
         bool checkPathIntersection(float x1, float y1, float x2, float y2, float xi, float yi);
+
+        std::vector<Node*> findShortestPath(float x_start, float y_start, float x_goal, float y_goal);
+
+        Node* findNearestNode(float x, float y);
 
         ~Mesh(){};
 

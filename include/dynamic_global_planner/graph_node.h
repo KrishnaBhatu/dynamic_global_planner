@@ -9,7 +9,7 @@ class Node
         std::vector<Node*> neighbours;
         float weight;
 
-        Node(){};
+        Node(){weight = 1;};
 
         float getX()
         {
@@ -30,7 +30,7 @@ class Node
         {
             y_ = y;
         }
-        
+
         ~Node(){};
     private:
         float x_; //In meters
