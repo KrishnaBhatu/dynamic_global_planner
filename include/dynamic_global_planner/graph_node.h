@@ -30,7 +30,6 @@ class Node
         {
             y_ = y;
         }
-
         
         ~Node(){};
     private:

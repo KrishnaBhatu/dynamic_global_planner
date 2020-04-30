@@ -2,6 +2,7 @@
 #define MESH_MAKER_H
 
 #include <ros/ros.h>
+#include <algorithm>
 #include <set>
 #include "dynamic_global_planner/graph_node.h"
 
@@ -12,6 +13,7 @@ class Mesh
 {
     public:
         std::vector<Node*> graph;
+        std::set<std::vector<float>> obstacles;
         Mesh(cv::Mat img)
         {
             input_image_ = img;
@@ -26,6 +28,12 @@ class Mesh
         bool checkObsInArea(int i, int j, int size);
 
         void drawGraphonImage();
+
+        void genNeighbours();
+
+        float getEucledianDistance(float x1, float y1, float x2, float y2);
+
+        bool checkPathIntersection(float x1, float y1, float x2, float y2, float xi, float yi);
 
         ~Mesh(){};
 
