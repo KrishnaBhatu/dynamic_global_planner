@@ -10,11 +10,11 @@ int main(int argv, char **argc) {
   cv::Mat input_image = cv::imread("/home/krishna/new_global_planner_ws/src/dynamic_global_planner/config/AddverbMap.png");
   Mesh mesh_object(input_image);
   mesh_object.preprocessImage(5);
+  // Dummy comment
   mesh_object.displayMap();
   mesh_object.probabilisticMeshMake(20);
   mesh_object.genNeighbours();
   mesh_object.drawGraphonImage();
-  
   return 0;
 }
 
