@@ -11,10 +11,13 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
 
+
 class Mesh
 {
     public:
-        static std::vector<Node*> graph;
+        Mesh(){};
+        std::vector<Node*> graph;
+        
         std::set<std::vector<float> > obstacles;
         Mesh(cv::Mat img)
         {
@@ -41,6 +44,7 @@ class Mesh
 
         Node* findNearestNode(float x, float y);
 
+        /**
         static std::vector<Node*>* getGraphRef()
         {
             //Node* p = .data();
@@ -51,7 +55,7 @@ class Mesh
             }
             return &graph;
         }
-
+        **/
         ~Mesh(){};
 
     private:

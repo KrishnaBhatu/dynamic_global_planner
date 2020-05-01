@@ -1,6 +1,5 @@
 #include "dynamic_global_planner/mesh_maker.h"
 
-std::vector<Node*> Mesh::graph;
 
 void Mesh::preprocessImage(int erosion_iterations)
 {
