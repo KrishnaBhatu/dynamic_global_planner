@@ -1,5 +1,7 @@
 #include "ros/ros.h"
 #include <iostream>
+#include <string>
+#include "nav_msgs/Odometry.h"
 #include "dynamic_global_planner/mesh_maker.h"
 #include "dynamic_global_planner/Graph.h"
 #include "dynamic_global_planner/Node.h"
@@ -10,7 +12,7 @@ int main(int argv, char **argc) {
   ros::NodeHandle nh;
   ros::Rate loop_rate(10);
   std::string ns = ros::this_node::getNamespace();
-  cv::Mat input_image = cv::imread("/home/siddhesh/Downloads/AddverbMap.png");
+  cv::Mat input_image = cv::imread("/home/krishna/new_global_planner_ws/src/dynamic_global_planner/config/AddverbMap.png");
   
   Mesh mesh_object(input_image);
   mesh_object.preprocessImage(5);
@@ -23,6 +25,28 @@ int main(int argv, char **argc) {
   dynamic_global_planner::Graph graph_msg;
   while (ros::ok())
   {
+    if(mesh_object.robots.size() > 0) mesh_object.robots.clear();
+    
+    for(int r = 0; r < 100; r++)
+    {
+      std::string s = "/robot_";
+      std::string robot = std::to_string(r);
+      std::string topic = "/base_pose_ground_truth";
+      s.append(robot);
+      s.append(topic);
+      //ROS_INFO_STREAM(s);
+      boost::shared_ptr<nav_msgs::Odometry const> sharedloc;
+      nav_msgs::Odometry loc;
+      sharedloc = ros::topic::waitForMessage<nav_msgs::Odometry>(s,nh);
+      if(sharedloc != NULL)
+      {
+        loc = *sharedloc;
+        std::tuple<float, float> temp_t(loc.pose.pose.position.x, loc.pose.pose.position.y);
+        mesh_object.robots.push_back(temp_t);
+        //if(r < 11) ROS_INFO_STREAM(loc.pose.pose.position.x << ", " << loc.pose.pose.position.y);
+      }
+    }
+    
     // Clear both object arrays
     graph_msg.mesh.clear();
     graph_msg.mesh_neighbour.clear();
@@ -33,6 +57,16 @@ int main(int argv, char **argc) {
       node.x = (*node_ptr).getX();
       node.y = (*node_ptr).getY();
       node.weight = (*node_ptr).weight;
+      float weight_count = 1;
+      for(auto a: mesh_object.robots)
+      {
+        float dist = mesh_object.getEucledianDistance(node_ptr->getX(), node_ptr->getY(), std::get<0>(a), std::get<1>(a));
+        if(dist < 3.0)
+        {
+          weight_count += 1.0;
+        }
+      }
+      node_ptr->weight = weight_count;
       for(auto ngh_ptr:(*node_ptr).neighbours)
       {
         dynamic_global_planner::Node n_node;
@@ -45,6 +79,8 @@ int main(int argv, char **argc) {
       graph_msg.mesh_neighbour.push_back(neigh);
     }
 
+
+    mesh_object.displayMapwithCrowds();
 
     graph_pub.publish(graph_msg);
     ros::spinOnce();

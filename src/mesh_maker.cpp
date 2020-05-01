@@ -76,6 +76,32 @@ void Mesh::probabilisticMeshMake(int spacing_factor)
     }
 }
 
+void Mesh::displayMapwithCrowds()
+{
+    if(graph.size() > 0)
+    {
+        cv::Mat img(input_image_.rows, input_image_.cols, CV_8UC3, cv::Scalar(0,0, 100));
+
+        for(auto a: graph)
+        {
+            int x = (int)(a->getX()*10);
+            int y = (int)(a->getY()*10);
+            y = input_image_.rows - y;
+            cv::Vec3b& color = img.at<cv::Vec3b>(y,x);
+            color[0] = 255;
+            if(a->weight > 2.0)
+            {
+                cv::circle(img, cv::Point(x,y), 2, cv::Scalar(0,255, 0), -1);
+            }
+        }
+        
+        cv::imshow("Graph", img);
+        cv::waitKey(0);
+        cv::destroyAllWindows();
+    }
+    return;
+}
+
 void Mesh::drawGraphonImage()
 {
     if(graph.size() > 0)

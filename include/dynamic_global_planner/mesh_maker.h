@@ -6,6 +6,7 @@
 #include <set>
 #include <queue>
 #include <limits>
+#include <tuple>
 #include "dynamic_global_planner/graph_node.h"
 
 #include "opencv2/highgui.hpp"
@@ -17,7 +18,7 @@ class Mesh
     public:
         Mesh(){};
         std::vector<Node*> graph;
-        
+        std::vector<std::tuple<float, float>> robots;
         std::set<std::vector<float> > obstacles;
         Mesh(cv::Mat img)
         {
@@ -44,18 +45,8 @@ class Mesh
 
         Node* findNearestNode(float x, float y);
 
-        /**
-        static std::vector<Node*>* getGraphRef()
-        {
-            //Node* p = .data();
-        //    static std::vector<Node*> temp_graph = graph;
-            for(int i = 0; i < graph.size(); i++)
-            {
-                ROS_INFO_STREAM(graph[i]->getX() << ", " << graph[i]->getY());
-            }
-            return &graph;
-        }
-        **/
+        void displayMapwithCrowds();
+        
         ~Mesh(){};
 
     private:
