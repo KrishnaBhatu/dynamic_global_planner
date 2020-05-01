@@ -1,11 +1,13 @@
 #include "dynamic_global_planner/mesh_maker.h"
 
+std::vector<Node*> Mesh::graph;
+
 void Mesh::preprocessImage(int erosion_iterations)
 {
     
     cv::threshold(input_image_, input_image_, 127, 255, 0);
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT,
-                                       cv::Size( 2*5 + 1, 2*5+1 ));
+                                       cv::Size( 2*5 + 1, 2*5 + 1 ));
 
     cv::erode(input_image_, input_image_, element), cv::Point(-1, -1), erosion_iterations;
 }
@@ -34,8 +36,10 @@ bool Mesh::checkObsInArea(int i, int j, int size)
                 if(value == cv::Vec3b(0,0,0))
                 {
                     val = true;
-                    float qx = (float)x/10;
-                    float qy = (float)(input_image_.rows - y)/10;
+                    float qx = (float)x;
+                    float qy = (float)(input_image_.rows - y);
+                    qx = qx/10;
+                    qy = qy/10;
                     std::vector<float> temp_v{qx, qy};
                     obstacles.insert(temp_v);
                 }
@@ -63,7 +67,8 @@ void Mesh::probabilisticMeshMake(int spacing_factor)
                 int y_new = i + y_select;
                 if(y_new >  input_image_.rows) y_new = input_image_.rows;
                 float x = (float)x_new/10;
-                float y = (float)(input_image_.rows - y_new)/10;
+                float y = (float)(input_image_.rows - y_new);
+                y= y/10;
                 graph_node->setX(x);
                 graph_node->setY(y);
                 graph.push_back(graph_node); 
@@ -93,12 +98,13 @@ void Mesh::drawGraphonImage()
                 //cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 0), 1);
             }
         }
-        std::vector<Node*> final = findShortestPath(25, 35, 920, 500);
+        std::vector<Node*> final = findShortestPath(0.25, 0.35, 92, 50);
         int x = (int)(final[0]->getX()*10);
         int y = (int)(final[0]->getY()*10);
         y = input_image_.rows - y; 
         for(auto a: final)
         {
+            ROS_INFO_STREAM(x << ", " << y);
             int x1 = (int)(a->getX()*10);
             int y1 = (int)(a->getY()*10);
             y1 = input_image_.rows - y1;

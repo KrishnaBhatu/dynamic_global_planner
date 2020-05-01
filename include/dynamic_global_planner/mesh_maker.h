@@ -14,8 +14,8 @@
 class Mesh
 {
     public:
-        std::vector<Node*> graph;
-        std::set<std::vector<float>> obstacles;
+        static std::vector<Node*> graph;
+        std::set<std::vector<float> > obstacles;
         Mesh(cv::Mat img)
         {
             input_image_ = img;
@@ -40,6 +40,17 @@ class Mesh
         std::vector<Node*> findShortestPath(float x_start, float y_start, float x_goal, float y_goal);
 
         Node* findNearestNode(float x, float y);
+
+        static std::vector<Node*>* getGraphRef()
+        {
+            //Node* p = .data();
+        //    static std::vector<Node*> temp_graph = graph;
+            for(int i = 0; i < graph.size(); i++)
+            {
+                ROS_INFO_STREAM(graph[i]->getX() << ", " << graph[i]->getY());
+            }
+            return &graph;
+        }
 
         ~Mesh(){};
 
