@@ -1,0 +1,112 @@
+<launch>
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="0" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="1" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="2" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="3" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="4" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="5" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="6" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="7" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="8" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="9" />
+<!-- 
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="10" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="11" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="12" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="13" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="14" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="15" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="16" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="17" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="18" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="19" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="20" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="21" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="22" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="23" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="24" /> -->
+    
+    <!-- <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="25" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="26" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="27" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="28" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="29" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="30" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="31" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="32" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="33" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="34" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="35" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="36" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="37" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="38" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="39" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="40" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="41" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="42" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="43" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="44" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="45" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="46" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="47" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="48" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="49" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="50" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="51" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="52" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="53" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="54" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="55" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="56" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="57" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="58" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="59" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="60" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="61" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="62" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="63" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="64" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="65" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="66" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="67" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="68" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="69" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="70" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="71" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="72" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="73" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="74" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="75" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="76" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="77" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="78" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="79" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="80" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="81" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="82" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="83" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="84" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="85" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="86" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="87" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="88" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="89" />
+
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="90" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="91" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="92" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="93" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="94" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="95" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="96" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="97" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="98" />
+    <node pkg="death_star" type="rob.py" name="rob0" output="screen" ns="99" /> -->
+</launch>

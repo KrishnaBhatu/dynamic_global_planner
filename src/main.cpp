@@ -8,6 +8,7 @@
 #include "dynamic_global_planner/Neighbour.h"
 
 int main(int argv, char **argc) {
+  ROS_INFO("Dynamic Global Planner Initiated");
   ros::init(argv, argc, "smart_planner");
   ros::NodeHandle nh;
   ros::Rate loop_rate(10);
@@ -15,11 +16,12 @@ int main(int argv, char **argc) {
   cv::Mat input_image = cv::imread("/home/krishna/new_global_planner_ws/src/dynamic_global_planner/config/AddverbMap.png");
   
   Mesh mesh_object(input_image);
-  mesh_object.preprocessImage(5);
+  mesh_object.preprocessImage(2);
   mesh_object.displayMap();
   mesh_object.probabilisticMeshMake(20);
   mesh_object.genNeighbours();
   mesh_object.drawGraphonImage();
+
 
   ros::Publisher graph_pub = nh.advertise<dynamic_global_planner::Graph>("graph_topic", 1);
   dynamic_global_planner::Graph graph_msg;
@@ -27,7 +29,7 @@ int main(int argv, char **argc) {
   {
     if(mesh_object.robots.size() > 0) mesh_object.robots.clear();
     
-    for(int r = 0; r < 100; r++)
+    for(int r = 0; r < 10; r++)
     {
       std::string s = "/robot_";
       std::string robot = std::to_string(r);
@@ -79,10 +81,11 @@ int main(int argv, char **argc) {
       graph_msg.mesh_neighbour.push_back(neigh);
     }
 
+    //mesh_object.drawGraphonImage();
+    //mesh_object.displayMapwithCrowds();
 
-    mesh_object.displayMapwithCrowds();
-
-    graph_pub.publish(graph_msg);
+    graph_pub.publish(graph_msg); // Publishes the mesh
+    ROS_INFO_STREAM("Published, launch death star!");
     ros::spinOnce();
     loop_rate.sleep();
   }

@@ -1,10 +1,7 @@
 <launch>
-	<node pkg="dynamic_global_planner" type="smart_planner" name="smart_planner" output="screen" />
-	
-	<arg name="map_file" default="/home/krishna/Siddhesh/Latest-Warehouse-DWA/src/dwa/stage/AddverbMap.yaml"/>
+    <arg name="map_file" default="/home/krishna/Siddhesh/Latest-Warehouse-DWA/src/dwa/stage/AddverbMap.yaml"/>
 	
     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
 
     <node name="stage" pkg="stage_ros" type="stageros" args="/home/krishna/Siddhesh/Latest-Warehouse-DWA/src/dwa/stage/AddverbMap.world" />
-    
 </launch>

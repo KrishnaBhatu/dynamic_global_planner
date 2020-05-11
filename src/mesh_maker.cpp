@@ -6,9 +6,9 @@ void Mesh::preprocessImage(int erosion_iterations)
     
     cv::threshold(input_image_, input_image_, 127, 255, 0);
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT,
-                                       cv::Size( 2*5 + 1, 2*5 + 1 ));
+                                       cv::Size( 2*2 + 1, 2*2 + 1 ));
 
-    cv::erode(input_image_, input_image_, element), cv::Point(-1, -1), erosion_iterations;
+    cv::erode(input_image_, input_image_, element, cv::Point(-1, -1), erosion_iterations);
 }
 
 void Mesh::displayMap()
@@ -81,7 +81,6 @@ void Mesh::displayMapwithCrowds()
     if(graph.size() > 0)
     {
         cv::Mat img(input_image_.rows, input_image_.cols, CV_8UC3, cv::Scalar(0,0, 100));
-
         for(auto a: graph)
         {
             int x = (int)(a->getX()*10);
@@ -106,8 +105,7 @@ void Mesh::drawGraphonImage()
 {
     if(graph.size() > 0)
     {
-        cv::Mat img(input_image_.rows, input_image_.cols, CV_8UC3, cv::Scalar(0,0, 100));
-
+        cv::Mat img = cv::imread("/home/krishna/new_global_planner_ws/src/dynamic_global_planner/config/AddverbMap.png");
         for(auto a: graph)
         {
             int x = (int)(a->getX()*10);
@@ -120,7 +118,7 @@ void Mesh::drawGraphonImage()
                 int x1 = (int)(N->getX()*10);
                 int y1 = (int)(N->getY()*10);
                 y1 = input_image_.rows - y1;
-                //cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 0), 1);
+                cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 0), 1);
             }
         }
         std::vector<Node*> final = findShortestPath(0.25, 0.35, 92, 50);
@@ -133,7 +131,7 @@ void Mesh::drawGraphonImage()
             int x1 = (int)(a->getX()*10);
             int y1 = (int)(a->getY()*10);
             y1 = input_image_.rows - y1;
-            cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0,255, 255), 1);
+            cv::line(img, cv::Point(x,y), cv::Point(x1,y1), cv::Scalar(0, 0 , 255), 2);
             x = x1;
             y = y1;
         }
@@ -169,7 +167,7 @@ void Mesh::genNeighbours()
     ROS_INFO_STREAM("-----Generating Neighbours--------");
     ROS_INFO_STREAM("No of nodes-> " << graph.size());
     ROS_INFO_STREAM("No of obs-> " << obstacles.size());
-    float neighbour_threshold = 5.0;
+    float neighbour_threshold = 4.0;
     
     if(graph.size() > 0)
     {
